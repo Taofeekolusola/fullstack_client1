@@ -1,0 +1,79 @@
+/* Base styles for larger screens */
+.container2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: whitesmoke;
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  width: 90%;
+}
+
+.register {
+  background: #4a90e2; /* Vibrant blue */
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Query for tablets (between 600px and 1024px) */
+@media (max-width: 1024px) {
+  .form2 {
+      padding: 20px 30px; /* Reduce padding for smaller screens */
+  }
+
+  .input {
+      width: 80%; /* Make input fields more responsive */
+  }
+
+  .register {
+      font-size: 14px; /* Reduce button font size */
+      padding: 10px 18px; /* Reduce padding for buttons */
+  }
+}
+
+/* Media Query for mobile devices (max-width 600px) */
+@media (max-width: 600px) {
+  .container2 {
+      padding: 5px; /* Reduce padding */
+  }
+
+  .form2 {
+      padding: 15px 20px; /* Reduce padding even more for mobile */
+      width: 90%; /* Make the form take more space on smaller screens */
+      max-width: 100%; /* Ensure it doesn't overflow */
+  }
+
+  .input {
+      width: 100%; /* Input fields take up full width */
+      padding: 8px; /* Reduce padding */
+  }
+
+  .register {
+      font-size: 14px; /* Adjust button font size */
+      padding: 10px 15px; /* Reduce button padding */
+  }
+}

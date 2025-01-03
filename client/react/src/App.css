@@ -1,0 +1,253 @@
+/* Reset and basic styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff; /* Light blue background */
+  height: 100%; /* Full height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align everything from top to bottom */
+  align-items: center; /* Center horizontally */
+  width: 100%;
+}
+
+/* App container styling */
+.App {
+  display: flex;
+  flex-direction: column; /* Stack navigation and posts vertically */
+  justify-content: flex-start; /* Align to the top */
+  align-items: center; /* Center content horizontally */
+  gap: 20px; /* Space between navigation and posts */
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin-top: 60px; /* Adjusted space at the top */
+}
+
+/* Navigation bar container */
+nav {
+display: flex;
+justify-content: center;
+gap: 20px; /* Space between links */
+background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Gradient background */
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+border-radius: 0; /* No border-radius for a full-width effect */
+width: 100%; /* Full width of the viewport */
+padding: 10px 0; /* Vertical padding */
+position: fixed; /* Fix the navbar at the top */
+top: 0; /* Ensure it stays at the top */
+left: 0; /* Align with the left edge */
+z-index: 1000; /* Ensure it stays on top of other content */
+}
+
+/* Link styling */
+nav a {
+text-decoration: none;
+font-size: 18px;
+color: #fff; /* White text */
+font-weight: bold;
+padding: 10px 20px; /* Adjusted padding for better spacing */
+border-radius: 4px;
+transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Active link styling */
+nav a:active {
+background-color: #3b7dc4; /* Darker blue on click */
+transform: translateY(0); /* Reset lift effect */
+}
+
+/* Post containers wrapper */
+.posts {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping of posts to the next row if necessary */
+  gap: 20px; /* Space between posts */
+  justify-content: center; /* Center posts horizontally */
+  width: 100%;
+}
+
+/* Style each post container */
+.container {
+  display: flex;
+  flex-direction: column; /* Arrange title, body, and footer vertically */
+  align-items: center; /* Center content horizontally */
+  width: 250px;
+  padding: 10px;
+  padding-top: 0px;
+  margin-top: 15px;
+  background: linear-gradient(135deg, #f8c4c5, #f79d84); /* Gradient background */
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+/* Add hover effect for each container */
+.container:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Title styling */
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3383dd; /* Vibrant blue */
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Body styling */
+.body {
+  font-size: 16px;
+  color: #333; /* Dark gray */
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer styling */
+.footer {
+  font-size: 14px;
+  color: #6a1b9a; /* Deep purple */
+  font-style: italic;
+  margin-top: 0;
+  width: 100%;
+  height: 30px;
+  padding: 5px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  padding-bottom: 0px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.user {
+  font-size: 14px;
+  color: #6a1b9a; /* Deep purple */
+  font-style: italic;
+  margin-top: 10px;
+  text-align: right; /* Align user info to the right */
+}
+
+.user, .logout {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout {
+  width: 50%;
+}
+
+.logout button {
+  background: #4a90e2; /* Vibrant blue */
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  height: 1.5%px;
+}
+
+/* Media Query for tablets (between 600px and 1024px) */
+@media (max-width: 1024px) {
+  .user, .logout {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .logout {
+    width: 40%;
+  }
+
+  .container {
+    width: 70%;
+  }
+
+  nav {
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  nav a {
+    width: auto;
+    font-size: 16px;
+  }
+
+  nav a:hover {
+    margin: 5px;
+  }
+}
+
+/* Media Query for mobile devices (max-width 768px) */
+@media (max-width: 768px) {
+  .user, .logout {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .logout {
+    width: 30%;
+  }
+
+  .container {
+    width: 60%;
+  }
+
+  nav {
+    gap: 5px;
+    font-size: 14px;
+  }
+
+  nav a {
+    width: 50%;
+    margin-right: 0;
+    padding-right: 0;
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  nav a:hover {
+    margin: 5px;
+  }
+}
+
+/* Media Query for smaller mobile devices (max-width 568px) */
+@media (max-width: 568px) {
+  .user, .logout {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .logout {
+    width: 30%;
+  }
+
+  .container {
+    width: 150px;
+  }
+
+  nav {
+    gap: 5px;
+  }
+
+  nav a {
+    width: 50%;
+    margin-right: 0;
+    padding-right: 0;
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  nav a:hover {
+    margin: 5px;
+  }
+}

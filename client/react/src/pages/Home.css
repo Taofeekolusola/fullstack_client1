@@ -1,0 +1,52 @@
+/* Like button */
+.like {
+    background: rgb(60, 60, 238);
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-left: 7.3%;
+    height: 24px;
+    margin-right: 2px;
+  }
+  
+  /* Footer span */
+  .footer span {
+    float: left;
+    color: white;
+  }
+  
+  /* Delete button */
+  .delete1 {
+    background: rgb(60, 60, 238);
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-right: 20%;
+    height: 22px;
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media (max-width: 768px) {
+    /* Adjust the Like button */
+    .like {
+      margin-left: 3px; /* Adjust left margin */
+      margin-right: 3px; /* Increase right margin for more space */
+      height: 25px; /* Slightly larger height */
+      padding: 0 10px; /* Add some padding */
+    }
+  
+    /* Adjust Footer span */
+    .footer span {
+      font-size: 14px; /* Smaller text size */
+    }
+  
+    /* Adjust Delete button */
+    .delete1 {
+      margin-right: 2px; /* Reduce right margin */
+      height: 25px; /* Slightly larger height */
+      padding: 0 10px; /* Add some padding */
+    }
+  }

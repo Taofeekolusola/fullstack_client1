@@ -1,0 +1,113 @@
+/* Reset and basic styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff; /* Light blue background */
+}
+
+/* Create Post Page styling */
+.createPostPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; /* Full height */
+  background-color: #f0f8ff; /* Matches previous background */
+}
+
+/* Form container */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Gradient background */
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+  margin: 10px; /* Space above form */
+}
+
+/* Form labels */
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #4a90e2; /* Vibrant blue */
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  align-self: flex-start; /* Align labels to the left */
+}
+
+/* Form input fields */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Field focus effect */
+input:focus {
+  border-color: #4a90e2; /* Blue border on focus */
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+}
+
+/* Submit button */
+.submit {
+  background: #4a90e2; /* Vibrant blue */
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background: #3b7dc4; /* Darker blue on hover */
+  transform: translateY(-3px); /* Lift on hover */
+}
+
+button:active {
+  background: #3367a6; /* Even darker blue on click */
+  transform: translateY(0); /* Reset lift */
+}
+
+/* Error message styling */
+.error {
+  color: #e91e63; /* Pink for errors */
+  font-size: 12px;
+  margin-top: -15px;
+  margin-bottom: 10px;
+  align-self: flex-start; /* Align errors to the left */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .form {
+    padding: 20px; /* Reduce padding */
+    border-radius: 12px; /* Slightly smaller border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for smaller screens */
+  }
+
+  label {
+    font-size: 14px; /* Reduce label font size */
+  }
+
+  input {
+    font-size: 12px; /* Smaller font size for input fields */
+    padding: 8px; /* Reduce padding */
+  }
+
+  .submit {
+    font-size: 14px; /* Adjust font size */
+    padding: 10px 15px; /* Smaller padding */
+  }
+}
