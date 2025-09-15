@@ -92,6 +92,7 @@
 .form-actions {
   display: flex;
   justify-content: flex-end;
+  gap: var(--spacing-3);
   margin-top: var(--spacing-4);
 }
 
@@ -116,6 +117,25 @@
 
 .create-post-button:active {
   transform: translateY(0);
+}
+
+/* Secondary button */
+.btn-secondary {
+  background: var(--background-color);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-3) var(--spacing-6);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-color);
+  border-color: var(--border-hover);
+  color: var(--text-primary);
 }
 
 /* Error message styling */

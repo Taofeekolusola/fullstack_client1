@@ -1,0 +1,17 @@
+/* Dashboard Page */
+.dashboard-page {
+    padding: var(--spacing-6) 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-page {
+        padding: var(--spacing-4) 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-page {
+        padding: var(--spacing-3) 0;
+    }
+}

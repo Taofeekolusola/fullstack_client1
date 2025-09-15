@@ -1,3 +1,12 @@
+/* Section title styling */
+.section-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-6) 0;
+  text-align: center;
+}
+
 /* Post author styling */
 .post-author {
   display: flex;
@@ -9,6 +18,19 @@
   font-weight: 500;
   color: var(--text-secondary);
   font-size: var(--font-size-sm);
+}
+
+.author-name.clickable {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+}
+
+.author-name.clickable:hover {
+  color: var(--primary-color);
+  background: var(--background-color);
+  transform: translateY(-1px);
 }
 
 /* Post actions styling */

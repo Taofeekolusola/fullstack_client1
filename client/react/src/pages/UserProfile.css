@@ -1,0 +1,17 @@
+/* User Profile Page */
+.user-profile-page {
+    padding: var(--spacing-6) 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .user-profile-page {
+        padding: var(--spacing-4) 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-profile-page {
+        padding: var(--spacing-3) 0;
+    }
+}

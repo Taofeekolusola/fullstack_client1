@@ -1,18 +1,22 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import './Createpost.css';
 import * as Yup from 'yup';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './helpers/AuthContext';
+import PostPreview from '../components/PostPreview';
 
 function CreatePosts() {
     const { authState } = useContext(AuthContext); // Access user data from context
     const navigate = useNavigate();
+    const [showPreview, setShowPreview] = useState(false);
+    const [previewData, setPreviewData] = useState(null);
 
     const initialValues = {
         title: '',
         content: '',
+        status: 'published',
     };
 
     useEffect(() => {
@@ -37,6 +41,28 @@ function CreatePosts() {
         });
     };
 
+    const handlePreview = (values) => {
+        setPreviewData({
+            ...values,
+            username: authState.username,
+        });
+        setShowPreview(true);
+    };
+
+    const handlePublish = (postData) => {
+        setShowPreview(false);
+        onSubmit(postData);
+    };
+
+    const handleSaveDraft = (postData) => {
+        const draftData = {
+            ...postData,
+            status: 'draft',
+        };
+        setShowPreview(false);
+        onSubmit(draftData);
+    };
+
     const validationSchema = Yup.object().shape({
         title: Yup.string().required('Title is required'),
         content: Yup.string().required('Content is required'),
@@ -55,6 +81,7 @@ function CreatePosts() {
                         onSubmit={onSubmit}
                         validationSchema={validationSchema}
                     >
+                        {({ values }) => (
                         <Form className="create-post-form">
                             <div className="form-group">
                                 <label htmlFor="title">Post Title</label>
@@ -79,14 +106,31 @@ function CreatePosts() {
                             </div>
                             
                             <div className="form-actions">
+                                <button 
+                                    type="button" 
+                                    className="btn-secondary"
+                                    onClick={() => handlePreview(values)}
+                                >
+                                    Preview
+                                </button>
                                 <button className="create-post-button" type="submit">
                                     Publish Post
                                 </button>
                             </div>
                         </Form>
+                        )}
                     </Formik>
                 </div>
             </div>
+            
+            {showPreview && previewData && (
+                <PostPreview
+                    post={previewData}
+                    onClose={() => setShowPreview(false)}
+                    onPublish={handlePublish}
+                    onSaveDraft={handleSaveDraft}
+                />
+            )}
         </div>
     );
 }

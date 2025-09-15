@@ -5,6 +5,8 @@ import CreatePosts from "./pages/CreatePosts";
 import Post from "./pages/Post";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import UserProfile from "./pages/UserProfile";
 import { AuthContext } from "./pages/helpers/AuthContext";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -65,6 +67,7 @@ function App() {
                     <>
                       <Link to="/">Home</Link>
                       <Link to="/createpost">Create</Link>
+                      <Link to="/dashboard">Dashboard</Link>
                       <Link to="/changepassword">Settings</Link>
                     </>
                   )}
@@ -91,6 +94,8 @@ function App() {
               <Route path="/post/:id" element={<Post />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/user/:username" element={<UserProfile />} />
               <Route path="/changepassword" element={<ChangePassword />} />
             </Routes>
           </div>

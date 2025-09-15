@@ -55,6 +55,12 @@ function Post() {
                     };
                     setComments([...comments, newComment]); // Add the new comment with _id
                     setCommentText(''); // Clear the input field
+                    
+                    // Update post comment count
+                    setPost(prevPost => ({
+                        ...prevPost,
+                        commentCount: (prevPost.commentCount || 0) + 1
+                    }));
                 }
             })
             .catch((error) => {
@@ -73,6 +79,12 @@ function Post() {
         // Optimistically update the state before making the API call
         const updatedComments = comments.filter((comment) => comment._id !== commentId);
         setComments(updatedComments); // Update state immediately
+        
+        // Update post comment count
+        setPost(prevPost => ({
+            ...prevPost,
+            commentCount: Math.max(0, (prevPost.commentCount || 0) - 1)
+        }));
 
         axios
             .delete(`https://fullstack-server-side.onrender.com/comments/del/${commentId}`, {
@@ -98,52 +110,56 @@ function Post() {
     const editPost = (option) => {
         if (option !== "body") {
             let newTitle = prompt("Enter a new Title");
-            axios
-                .put(
-                    "https://fullstack-server-side.onrender.com/posts/title",
-                    { title: newTitle, id: id },
-                    {
-                        headers: {
-                            token: localStorage.getItem("token"),
-                        },
-                    }
-                )
-                .then((res) => {
-                    if (res.data.error) {
-                        alert(res.data.error);
-                    } else {
-                        // Update the post state with the new title
-                        setPost((prev) => ({ ...prev, title: newTitle }));
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error updating title:", error);
-                    alert("An error occurred while updating the title.");
-                });
+            if (newTitle && newTitle.trim()) {
+                axios
+                    .put(
+                        "https://fullstack-server-side.onrender.com/posts/update",
+                        { title: newTitle, id: id },
+                        {
+                            headers: {
+                                token: localStorage.getItem("token"),
+                            },
+                        }
+                    )
+                    .then((res) => {
+                        if (res.data.error) {
+                            alert(res.data.error);
+                        } else {
+                            // Update the post state with the new title
+                            setPost((prev) => ({ ...prev, title: newTitle }));
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error updating title:", error);
+                        alert("An error occurred while updating the title.");
+                    });
+            }
         } else {
             let newPost = prompt("Enter a new Post");
-            axios
-                .put(
-                    "https://fullstack-server-side.onrender.com/posts/text",
-                    { content: newPost, id: id },
-                    {
-                        headers: {
-                            token: localStorage.getItem("token"),
-                        },
-                    }
-                )
-                .then((res) => {
-                    if (res.data.error) {
-                        alert(res.data.error);
-                    } else {
-                        // Update the post state with the new content
-                        setPost((prev) => ({ ...prev, content: newPost }));
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error updating post content:", error);
-                    alert("An error occurred while updating the post.");
-                });
+            if (newPost && newPost.trim()) {
+                axios
+                    .put(
+                        "https://fullstack-server-side.onrender.com/posts/update",
+                        { content: newPost, id: id },
+                        {
+                            headers: {
+                                token: localStorage.getItem("token"),
+                            },
+                        }
+                    )
+                    .then((res) => {
+                        if (res.data.error) {
+                            alert(res.data.error);
+                        } else {
+                            // Update the post state with the new content
+                            setPost((prev) => ({ ...prev, content: newPost }));
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error updating post content:", error);
+                        alert("An error occurred while updating the post.");
+                    });
+            }
         }
     };
     
@@ -165,6 +181,11 @@ function Post() {
                         </h1>
                         <div className="post-meta">
                             <span className="post-author">Posted by {post.username}</span>
+                            <div className="post-stats">
+                                <span className="view-count">👀 {post.viewCount || 0} views</span>
+                                <span className="like-count">❤️ {post.likeCount || 0} likes</span>
+                                <span className="comment-count">💬 {post.commentCount || comments.length} comments</span>
+                            </div>
                         </div>
                     </div>
                     

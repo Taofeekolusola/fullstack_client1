@@ -5,6 +5,7 @@ import './Home.css';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { AuthContext } from './helpers/AuthContext';
+import PopularPosts from '../components/PopularPosts';
 
 function Home() {
   const [posts, setPosts] = useState([]); // State to store fetched posts
@@ -20,20 +21,9 @@ function Home() {
       const fetchPosts = async () => {
         try {
           const { data: fetchedPosts } = await axios.get("https://fullstack-server-side.onrender.com/posts/get");
-
-          const likeCountPromises = fetchedPosts.map((post) =>
-            axios.get(`https://fullstack-server-side.onrender.com/likes/${post._id}`, {
-              headers: { token: localStorage.getItem("token") },
-            })
-          );
-
-          const likeCountResponses = await Promise.all(likeCountPromises);
-
-          const updatedPosts = fetchedPosts.map((post, index) => ({
-            ...post,
-            likeCount: likeCountResponses[index]?.data?.likeCount || 0,
-          }));
-          setPosts(updatedPosts);
+          
+          // Posts now come with likeCount and commentCount from the database
+          setPosts(fetchedPosts);
 
           const { data: likedPostsData } = await axios.get("https://fullstack-server-side.onrender.com/likes", {
             headers: { token: localStorage.getItem("token") },
@@ -89,15 +79,13 @@ function Home() {
           : prevLikedPosts.filter((id) => id !== postId)
       );
 
-      // Refetch like count for the specific post and update state
-      const { data: likeCountData } = await axios.get(`https://fullstack-server-side.onrender.com/likes/${postId}`, {
-        headers: { token: localStorage.getItem("token") },
-      });
+      // Refetch the specific post to get updated like count
+      const { data: updatedPost } = await axios.get(`https://fullstack-server-side.onrender.com/posts/get/${postId}`);
 
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
           post._id === postId
-            ? { ...post, likeCount: likeCountData.likeCount }
+            ? { ...post, likeCount: updatedPost.likeCount }
             : post
         )
       );
@@ -108,7 +96,10 @@ function Home() {
 
   return (
     <div className="page-container">
+      <PopularPosts />
+      
       <div className="posts">
+        <h2 className="section-title">Latest Posts</h2>
         {posts && posts.length > 0 ? (
           posts.map((post) => (
             <div className="container" key={post._id}>
@@ -119,7 +110,16 @@ function Home() {
               
               <div className="footer">
                 <div className="post-author">
-                  <span className="author-name">{post.username}</span>
+                  <span 
+                    className="author-name clickable"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/user/${post.username}`);
+                    }}
+                    title={`View posts by ${post.username}`}
+                  >
+                    {post.username}
+                  </span>
                 </div>
                 <div className="post-actions">
                   {post.username === authState.username && (
