@@ -43,32 +43,50 @@ function CreatePosts() {
     });
 
     return (
-        <div className="createPostPage">
-            <Formik
-                initialValues={initialValues}
-                onSubmit={onSubmit}
-                validationSchema={validationSchema}
-            >
-                <Form className='form'>
-                    <ErrorMessage name="title" component="span" className="error" />
-                    <label>Title: </label>
-                    <Field
-                        id="title"
-                        name="title"
-                        placeholder="(Ex. Title....)" 
-                    />
-                    
-                    <ErrorMessage name="content" component="span" className="error" />
-                    <label>Content: </label>
-                    <Field
-                        id="content"
-                        name="content"
-                        placeholder="(Ex. ....)" 
-                    />
-                    
-                    <button className='submit' type="submit">Create Post</button>
-                </Form>
-            </Formik>
+        <div className="page-container">
+            <div className="create-post-container">
+                <div className="create-post-card">
+                    <div className="create-post-header">
+                        <h1>Create New Post</h1>
+                        <p>Share your thoughts with the community</p>
+                    </div>
+                    <Formik
+                        initialValues={initialValues}
+                        onSubmit={onSubmit}
+                        validationSchema={validationSchema}
+                    >
+                        <Form className="create-post-form">
+                            <div className="form-group">
+                                <label htmlFor="title">Post Title</label>
+                                <Field
+                                    id="title"
+                                    name="title"
+                                    placeholder="What's your post about?"
+                                />
+                                <ErrorMessage name="title" component="span" className="error" />
+                            </div>
+                            
+                            <div className="form-group">
+                                <label htmlFor="content">Content</label>
+                                <Field
+                                    as="textarea"
+                                    id="content"
+                                    name="content"
+                                    placeholder="Share your thoughts, ideas, or experiences..."
+                                    rows="6"
+                                />
+                                <ErrorMessage name="content" component="span" className="error" />
+                            </div>
+                            
+                            <div className="form-actions">
+                                <button className="create-post-button" type="submit">
+                                    Publish Post
+                                </button>
+                            </div>
+                        </Form>
+                    </Formik>
+                </div>
+            </div>
         </div>
     );
 }

@@ -24,27 +24,45 @@ function Signup() {
           })
     }
   return (
-      <div className="container2">
-          <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>  
-              <Form className='form2'>
-                    <ErrorMessage name="username" component="span" className="error" />
-                    <label>Username: </label>
-                    <Field
-                        id="username"
-                        name="username"
-                        placeholder="(Ex. Taofeek....)" />
-                  <ErrorMessage name="password" component="span" className="error" />
-                    <label>Password: </label>
-                    <Field
-                        className="input"
-                        id="password"
-                        name="password"
-                        type="password"
-                        placeholder="(password...)" />
-                    <button onClick={() => navigate("/login")} type="submit" className="register">Register</button>
-                </Form>
-            </Formik>
-    </div>
+      <div className="page-container">
+          <div className="auth-container">
+              <div className="auth-card">
+                  <div className="auth-header">
+                      <h1>Create Account</h1>
+                      <p>Join our community and start sharing your thoughts</p>
+                  </div>
+                  <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>  
+                      <Form className="auth-form">
+                          <div className="form-group">
+                              <label htmlFor="username">Username</label>
+                              <Field
+                                  id="username"
+                                  name="username"
+                                  placeholder="Choose a username"
+                              />
+                              <ErrorMessage name="username" component="span" className="error" />
+                          </div>
+                          <div className="form-group">
+                              <label htmlFor="password">Password</label>
+                              <Field
+                                  id="password"
+                                  name="password"
+                                  type="password"
+                                  placeholder="Create a secure password"
+                              />
+                              <ErrorMessage name="password" component="span" className="error" />
+                          </div>
+                          <button onClick={() => navigate("/login")} type="submit" className="auth-button">
+                              Create Account
+                          </button>
+                      </Form>
+                  </Formik>
+                  <div className="auth-footer">
+                      <p>Already have an account? <a href="/login">Sign in</a></p>
+                  </div>
+              </div>
+          </div>
+      </div>
   )
 }
 

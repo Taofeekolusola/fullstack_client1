@@ -49,35 +49,51 @@ function App() {
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <nav>
-            {!authState.status ? (
-              <>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Signup</Link>
-              </>
-            ) : (
-              <>
-                <Link to="/createpost">Post</Link>
-                  <Link to="/">Home</Link>
-                  <Link to="/changepassword">Password</Link>
-              </>
-            )}
-            {authState.status && (
-              <div className="logout">
-                <button onClick={logout}>Logout</button>
+            <div className="nav-container">
+              <div className="nav-brand">
+                <Link to="/" className="brand-link">Blog</Link>
               </div>
-            )}
-            <h1 className="user">
-              {authState.status && greet} {authState.username}
-            </h1>
+              
+              <div className="nav-content">
+                <div className="nav-links">
+                  {!authState.status ? (
+                    <>
+                      <Link to="/login">Login</Link>
+                      <Link to="/signup">Sign Up</Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/">Home</Link>
+                      <Link to="/createpost">Create</Link>
+                      <Link to="/changepassword">Settings</Link>
+                    </>
+                  )}
+                </div>
+                
+                {authState.status && (
+                  <div className="nav-user">
+                    <span className="user-info">
+                      <span className="user-greeting">Hi,</span>
+                      <span className="username">{authState.username}</span>
+                    </span>
+                    <button onClick={logout} className="logout-btn">
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
           </nav>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/createpost" element={<CreatePosts />} />
-            <Route path="/post/:id" element={<Post />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/changepassword" element={<ChangePassword />} />
-          </Routes>
+          <div className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/createpost" element={<CreatePosts />} />
+              <Route path="/post/:id" element={<Post />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/changepassword" element={<ChangePassword />} />
+            </Routes>
+          </div>
         </Router>
       </AuthContext.Provider>
     </div>

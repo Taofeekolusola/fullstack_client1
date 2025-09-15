@@ -34,22 +34,47 @@ function Login() {
     };
 
     return (
-        <div className="container1">
-            <form className="form1" onSubmit={handleSubmit}>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    name="username"
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <label>Password:</label>
-                <input
-                    type="password"
-                    name="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button className='login' type="submit">Login</button>
-            </form>
+        <div className="page-container">
+            <div className="auth-container">
+                <div className="auth-card">
+                    <div className="auth-header">
+                        <h1>Welcome Back</h1>
+                        <p>Sign in to your account to continue</p>
+                    </div>
+                    <form className="auth-form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input
+                                id="username"
+                                type="text"
+                                name="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Enter your username"
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                id="password"
+                                type="password"
+                                name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter your password"
+                                required
+                            />
+                        </div>
+                        <button className="auth-button" type="submit">
+                            Sign In
+                        </button>
+                    </form>
+                    <div className="auth-footer">
+                        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

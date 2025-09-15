@@ -148,52 +148,92 @@ function Post() {
     };
     
     return (
-        <div className='genContainer'>
-            <div className='left'>
-                <div onClick={() => {
-                    if (authState.username === post.username) {
-                        editPost("title")
-                    }
-                }} className="title1">{post.title}</div>
-                <div onClick={() => { if (authState.username === post.username) {
-                        editPost("body")
-                    } }} className="body1">{post.content}</div>
-                <div className="footer1">Posted by: {post.username}</div>
-            </div>
-            <div className='right'>
-                <div className="comments">
-                    <input
-                        value={commentText}
-                        type="text"
-                        placeholder="comment..."
-                        onChange={(event) => setCommentText(event.target.value)}
-                    />
-                    <button onClick={onSubmit} type="submit" className='addComment'>
-                        Add Comment
-                    </button>
-                </div>
-                <div className='listOfComments'>
-    {comments.length === 0 ? (
-        <p>No comments added yet</p>  // Display message when no comments
-    ) : (
-        comments.map((comment, key) => (
-            <div className="listItems" key={key}>
-                <label className='username'>{comment.username}'s comment</label>
-                "{comment.comment}"
-                {/* Ensure _id is valid and available */}
-                {authState.username === comment.username && (
-                    <button
-                        onClick={() => deleteComment(comment._id)}
-                        className="delete"
-                    >
-                        X
-                    </button>
-                        )}
+        <div className="page-container">
+            <div className="post-detail-container">
+                <div className="post-detail-card">
+                    <div className="post-header">
+                        <h1 
+                            className="post-title"
+                            onClick={() => {
+                                if (authState.username === post.username) {
+                                    editPost("title")
+                                }
+                            }}
+                            style={{ cursor: authState.username === post.username ? 'pointer' : 'default' }}
+                        >
+                            {post.title}
+                        </h1>
+                        <div className="post-meta">
+                            <span className="post-author">Posted by {post.username}</span>
+                        </div>
                     </div>
-                        ))
-                    )}
+                    
+                    <div 
+                        className="post-content"
+                        onClick={() => { 
+                            if (authState.username === post.username) {
+                                editPost("body")
+                            } 
+                        }}
+                        style={{ cursor: authState.username === post.username ? 'pointer' : 'default' }}
+                    >
+                        {post.content}
+                    </div>
                 </div>
 
+                <div className="comments-section">
+                    <div className="comments-header">
+                        <h2>Comments ({comments.length})</h2>
+                    </div>
+                    
+                    <div className="add-comment-form">
+                        <div className="comment-input-group">
+                            <input
+                                value={commentText}
+                                type="text"
+                                placeholder="Share your thoughts..."
+                                onChange={(event) => setCommentText(event.target.value)}
+                                className="comment-input"
+                            />
+                            <button 
+                                onClick={onSubmit} 
+                                type="submit" 
+                                className="add-comment-btn"
+                                disabled={!commentText.trim()}
+                            >
+                                Add Comment
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div className="comments-list">
+                        {comments.length === 0 ? (
+                            <div className="no-comments">
+                                <p>No comments yet. Be the first to share your thoughts!</p>
+                            </div>
+                        ) : (
+                            comments.map((comment, key) => (
+                                <div className="comment-item" key={key}>
+                                    <div className="comment-header">
+                                        <span className="comment-author">{comment.username}</span>
+                                        {authState.username === comment.username && (
+                                            <button
+                                                onClick={() => deleteComment(comment._id)}
+                                                className="delete-comment-btn"
+                                                title="Delete comment"
+                                            >
+                                                🗑️
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className="comment-content">
+                                        {comment.comment}
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -1,52 +1,144 @@
-/* Like button */
-.like {
-    background: rgb(60, 60, 238);
-    color: white;
-    border-radius: 5px;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: row;
-    margin-left: 7.3%;
+/* Post author styling */
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.author-name {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* Post actions styling */
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Like button styling */
+.like-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.like-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.like-btn.liked {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.like-count {
+  font-weight: 500;
+  font-size: var(--font-size-xs);
+}
+
+/* Delete button styling */
+.delete-btn {
+  background: var(--error-color);
+  color: white;
+  border: none;
+  padding: var(--spacing-2);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.delete-btn:active {
+  transform: translateY(0);
+}
+
+/* Enhanced Responsive styles */
+@media (max-width: 768px) {
+  .post-actions {
+    gap: var(--spacing-1);
+    flex-wrap: wrap;
+  }
+
+  .like-btn {
+    padding: var(--spacing-1) var(--spacing-2);
+    font-size: var(--font-size-xs);
+    min-height: 36px;
+  }
+
+  .delete-btn {
+    padding: var(--spacing-1);
+    min-width: 28px;
+    height: 28px;
+    font-size: var(--font-size-xs);
+  }
+
+  .author-name {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .post-actions {
+    gap: var(--spacing-1);
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .like-btn {
+    padding: var(--spacing-1) var(--spacing-2);
+    font-size: 11px;
+    min-height: 32px;
+    flex: 1;
+    max-width: 120px;
+  }
+
+  .delete-btn {
+    padding: var(--spacing-1);
+    min-width: 24px;
     height: 24px;
-    margin-right: 2px;
+    font-size: 10px;
   }
-  
-  /* Footer span */
-  .footer span {
-    float: left;
-    color: white;
+
+  .author-name {
+    font-size: 11px;
   }
-  
-  /* Delete button */
-  .delete1 {
-    background: rgb(60, 60, 238);
-    color: white;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: row;
-    margin-right: 20%;
-    height: 22px;
+}
+
+@media (max-width: 360px) {
+  .like-btn {
+    font-size: 10px;
+    padding: var(--spacing-1);
   }
-  
-  /* Responsive styles for smaller screens */
-  @media (max-width: 768px) {
-    /* Adjust the Like button */
-    .like {
-      margin-left: 3px; /* Adjust left margin */
-      margin-right: 3px; /* Increase right margin for more space */
-      height: 25px; /* Slightly larger height */
-      padding: 0 10px; /* Add some padding */
-    }
-  
-    /* Adjust Footer span */
-    .footer span {
-      font-size: 14px; /* Smaller text size */
-    }
-  
-    /* Adjust Delete button */
-    .delete1 {
-      margin-right: 2px; /* Reduce right margin */
-      height: 25px; /* Slightly larger height */
-      padding: 0 10px; /* Add some padding */
-    }
+
+  .delete-btn {
+    min-width: 20px;
+    height: 20px;
+    font-size: 9px;
   }
+}

@@ -107,37 +107,56 @@ function Home() {
   };
 
   return (
-    <div>
-      {posts && posts.length > 0 ? (
-        posts.map((post) => (
-          <div className="container" key={post._id}>
-            <div className="title">{post.title}</div>
-            <div className="body" onClick={() => navigate(`post/${post._id}`)}>
-              {post.content}
+    <div className="page-container">
+      <div className="posts">
+        {posts && posts.length > 0 ? (
+          posts.map((post) => (
+            <div className="container" key={post._id}>
+              <div className="title">{post.title}</div>
+              <div className="body" onClick={() => navigate(`post/${post._id}`)}>
+                {post.content}
+              </div>
+              
+              <div className="footer">
+                <div className="post-author">
+                  <span className="author-name">{post.username}</span>
+                </div>
+                <div className="post-actions">
+                  {post.username === authState.username && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deletePost(post._id);
+                      }}
+                      className="delete-btn"
+                      title="Delete post"
+                    >
+                      🗑️
+                    </button>
+                  )}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      likeAPost(post._id);
+                    }}
+                    className={`like-btn ${likedPosts.includes(post._id) ? 'liked' : ''}`}
+                    title={likedPosts.includes(post._id) ? 'Unlike' : 'Like'}
+                  >
+                    {likedPosts.includes(post._id) ? <ThumbUpAltIcon /> : <ThumbDownAltIcon />}
+                    <span className="like-count">{post.likeCount}</span>
+                  </button>
+                </div>
+              </div>
             </div>
-            
-            <div className="footer">
-  {post.username === authState.username && (
-    <button
-      type="button"
-      onClick={() => deletePost(post._id)}
-      className="delete1"
-    >
-      X
-    </button>
-  )}
-  {post.username}
-  <div onClick={() => likeAPost(post._id)} className="like">
-    {likedPosts.includes(post._id) ? <ThumbUpAltIcon /> : <ThumbDownAltIcon />}
-  </div>
-  <span>{post.likeCount}</span> {/* Display the like count */}
-</div>
-
+          ))
+        ) : (
+          <div className="empty-state">
+            <h2>No posts yet</h2>
+            <p>Be the first to share something with the community!</p>
           </div>
-        ))
-      ) : (
-        <p>No posts available.</p>
-      )}
+        )}
+      </div>
     </div>
   );
 }

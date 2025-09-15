@@ -29,21 +29,40 @@ function ChangePassword() {
   };
 
   return (
-    <div>
-      <h1>Change Your Password</h1>
-      <input
-        type="password"
-        placeholder="Old Password"
-        onChange={(e) => setOldPassword(e.target.value)}
-        value={oldPassword}
-      />
-      <input
-        type="password"
-        placeholder="New Password"
-        onChange={(e) => setNewPassword(e.target.value)}
-        value={newPassword}
-      />
-      <button onClick={changePassword} className='change'>Submit</button>
+    <div className="page-container">
+      <div className="auth-container">
+        <div className="auth-card">
+          <div className="auth-header">
+            <h1>Change Password</h1>
+            <p>Update your account password</p>
+          </div>
+          <div className="auth-form">
+            <div className="form-group">
+              <label htmlFor="oldPassword">Current Password</label>
+              <input
+                id="oldPassword"
+                type="password"
+                placeholder="Enter your current password"
+                onChange={(e) => setOldPassword(e.target.value)}
+                value={oldPassword}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="newPassword">New Password</label>
+              <input
+                id="newPassword"
+                type="password"
+                placeholder="Enter your new password"
+                onChange={(e) => setNewPassword(e.target.value)}
+                value={newPassword}
+              />
+            </div>
+            <button onClick={changePassword} className="auth-button">
+              Update Password
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
